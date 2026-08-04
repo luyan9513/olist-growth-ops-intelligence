@@ -31,7 +31,7 @@
 | FR-16 / NFR-13 / NFR-14 | 仓库发布与无数据 CI | `.github/workflows/ci.yml`、PR/Issue 模板、`CONTRIBUTING.md`、`RELEASE_CHECKLIST.md`、`scripts/validate_repository.py` | `make ci`：最终 167 个候选文件检查通过、dbt parse 通过、64 项 Python 通过；真实 dbt build 84 PASS/2 WARN/0 ERROR | `docs/09_release_and_role_packaging.md`、P13 日志 | 完成 |
 | FR-17 | 四类岗位投递材料 | `reports/resume_bullets_by_role.md`、`reports/jd_tailoring_checklist.md`、README 与面试指南入口 | 仓库检查核对四版各 5 条；数字逐项取自 `portfolio_evidence.json`，明确离线/非 ROI 边界 | P13 日志 | 完成 |
 | FR-18 | 看板展示体验 | `.streamlit/config.toml`、`app/theme.py`、9 个图表页面、更新截图 | 10 页冒烟属于 64 项全量测试；4 张 1440×1000 PNG 真实浏览器生成、格式/尺寸自动检查并目视复核 | `docs/assets/portfolio/`、P13 日志 | 完成 |
-| NFR-15 | 托管 CI 与本地数据隔离 | `tests/test_streamlit_pages.py`、`tests/streamlit_fixtures.py`、`.github/workflows/ci.yml` | 首次 run `30891909430` 失败根因已确认；待本地干净数据模拟与新 GitHub run 后填写 | P14 日志 | 开发中 |
+| NFR-15 | 托管 CI 与本地数据隔离 | `tests/test_streamlit_pages.py`、`tests/streamlit_fixtures.py`、`.github/workflows/ci.yml` | 首次 run `30891909430` 失败；本地无数据库路径 64/64；修复 run `30892648947` 全步骤成功 | P14 日志 | 完成 |
 
 ## 文档验收索引
 

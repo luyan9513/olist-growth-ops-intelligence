@@ -119,8 +119,19 @@ make portfolio-check
 
 除首次托管 CI 已记录的 7 项失败外，本地修复和复验未遇到新的阻塞问题。页面 fixture 第一次实现即通过 13 项专项；未虚构额外调试过程。
 
+### 5.6 提交、推送与托管复验
+
+```bash
+git commit -m "Fix hosted CI data isolation"
+git push origin main
+gh run watch 30892648947 --exit-status
+```
+
+实际结果：修复提交为 `ce76e57`，已从 `98a9392` 推送到远端 `main`。新 GitHub Actions run `30892648947` 最终结论为 `success`；Checkout、Python 3.12、依赖安装、仓库检查、dbt parse、Python 测试和所有 post step 全部成功。此前失败的 Python 页面测试步骤已在干净托管 runner 中真实通过。
+
 ## 6. 局限与下一步
 
 - 合成 fixture 只能证明页面输入契约和组件渲染，不能证明真实指标正确；
 - CI 成功后仍不能替代真实数据的 dbt、模型和截图验收；
 - 当前工作流只有 CI，没有自动部署，因此不称完整 CD。
+- 合成 fixture 覆盖的是页面契约，不会发现真实数据新增列、类型漂移或业务指标异常；这些仍由本地真实数据链路负责。
