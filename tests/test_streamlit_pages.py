@@ -2,35 +2,53 @@ import pytest
 from streamlit.testing.v1 import AppTest
 
 
-def test_main_streamlit_app_renders_without_exception():
-    app = AppTest.from_file("app/app.py", default_timeout=30).run()
+PAGE_NAMES = [
+    "growth",
+    "channel",
+    "sellers",
+    "ops_actions",
+    "experiments",
+    "delivery",
+    "leads",
+    "demand",
+    "scenario",
+    "quality",
+]
+
+
+def page_source(page_name: str) -> str:
+    return (
+        "from tests.streamlit_fixtures import patch_page_data\n"
+        f"from app.pages import {page_name}\n"
+        f"patch_page_data({page_name!r}, {page_name})\n"
+        f"{page_name}.render()"
+    )
+
+
+def test_main_streamlit_app_handles_missing_database_without_exception():
+    source = """
+from pathlib import Path
+import app.data as data
+data.DATABASE_PATH = Path("data/processed/fixture_database_does_not_exist.duckdb")
+import app.app as app_module
+app_module.DATABASE_PATH = data.DATABASE_PATH
+app_module.main()
+"""
+    app = AppTest.from_string(source, default_timeout=30).run()
     assert not app.exception
+    assert any("尚未找到数据仓库" in error.value for error in app.error)
 
 
 @pytest.mark.parametrize(
-    "page_name",
-    [
-        "growth",
-        "channel",
-        "sellers",
-        "ops_actions",
-        "experiments",
-        "delivery",
-        "leads",
-        "demand",
-        "scenario",
-        "quality",
-    ],
+    "page_name", PAGE_NAMES,
 )
-def test_streamlit_page_renders_without_exception(page_name):
-    source = f"from app.pages import {page_name}\n{page_name}.render()"
-    app = AppTest.from_string(source, default_timeout=30).run()
+def test_streamlit_page_renders_with_synthetic_contract_data(page_name):
+    app = AppTest.from_string(page_source(page_name), default_timeout=30).run()
     assert not app.exception
 
 
 def test_ops_actions_default_state_renders_metrics_and_detail():
-    source = "from app.pages import ops_actions\nops_actions.render()"
-    app = AppTest.from_string(source, default_timeout=30).run()
+    app = AppTest.from_string(page_source("ops_actions"), default_timeout=30).run()
     assert not app.exception
     metric_labels = {metric.label for metric in app.metric}
     assert {
@@ -44,8 +62,7 @@ def test_ops_actions_default_state_renders_metrics_and_detail():
 
 
 def test_experiments_default_state_is_explicitly_planning_only():
-    source = "from app.pages import experiments\nexperiments.render()"
-    app = AppTest.from_string(source, default_timeout=30).run()
+    app = AppTest.from_string(page_source("experiments"), default_timeout=30).run()
     assert not app.exception
     metric_labels = {metric.label for metric in app.metric}
     assert {"当前候选商家", "规划所需总样本", "当前池可检测 MDE"}.issubset(metric_labels)

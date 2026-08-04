@@ -56,6 +56,8 @@ make ci
 
 `make ci` 检查仓库边界、解析 dbt 项目并运行全部 Python 测试；它与 GitHub Actions 的核心步骤一致，但不替代带真实数据的 `dbt build`、模型重训和看板验收。
 
+页面测试分为两类：主应用在数据库缺失时必须给出明确准备提示；10 个业务页面使用微型合成 fixture 验证字段契约和组件渲染。合成 fixture 不参与任何业务指标或模型结果，真实页面仍由本地 DuckDB、artifacts、`make portfolio-check` 和浏览器截图验收。
+
 原始数据不会进入 Git。文件要求与清单生成方式见 [data/raw/README.md](data/raw/README.md)。
 
 将两份 Kaggle 数据的 11 个 CSV 放入 `data/raw/` 后，完整复现流程：

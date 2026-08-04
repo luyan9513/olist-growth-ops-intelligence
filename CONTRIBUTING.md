@@ -17,6 +17,8 @@ make test
 
 涉及数据转换、训练或报告更新时，还需按 README 的完整流程重新生成产物。CI 只验证无需私有或大体积数据的部分，不能替代本地全量验证。
 
+Streamlit 的 CI 测试使用 `tests/streamlit_fixtures.py` 中的微型合成输入验证页面契约；不得把该 fixture 的数量或结果写入业务报告。真实数据页面改动还需在本地完成 `make portfolio-check` 或对应浏览器验收。
+
 ## 分析与模型约束
 
 - 线索成交预测不得使用成交后字段。

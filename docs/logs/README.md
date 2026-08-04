@@ -33,6 +33,7 @@
 | 14 | `2026-08-02_p12_portfolio_delivery.md` | P12 投递版作品集 | 统一证据、案例报告、原生报告、四张真实截图、一键验收、Streamlit 入口问题与文档终验 |
 | 15 | `2026-08-02_p13_release_visual_role_polish.md` | P13 发布、视觉与岗位定制 | 无数据 CI、仓库卫生、统一看板主题、四岗位 Bullet、真实落地闸门、截图问题与最终文档验收 |
 | 16 | `2026-08-04_git_initial_publish.md` | 首次 GitHub 发布 | 登录与远端核验、公开仓库边界、提交范围、首次提交与推送证据 |
+| 17 | `2026-08-04_p14_hosted_ci_data_isolation.md` | P14 托管 CI 数据隔离修复 | 首次 Actions 失败、页面测试隐式依赖、合成 fixture、干净环境与托管复验 |
 
 ## 3. 如何理解阶段性语句
 
