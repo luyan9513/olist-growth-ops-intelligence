@@ -1,0 +1,1 @@
+outcome_id,assignment_id,experiment_id,seller_id,outcome_window_start,outcome_window_end,orders_count,delivered_orders_count,late_orders_count,reviewed_orders_count,low_review_orders_count,gmv,cancelled_orders,refund_amount,observed_at

@@ -1,0 +1,36 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+
+# Raw/processed data and generated artifacts
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/README.md
+data/processed/*
+!data/processed/.gitkeep
+artifacts/*
+!artifacts/.gitkeep
+models/*.joblib
+*.duckdb
+*.duckdb.wal
+
+# dbt generated files
+dbt/.user.yml
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+
+# Streamlit and editor/OS files
+.streamlit/secrets.toml
+.DS_Store
+.idea/
+.vscode/

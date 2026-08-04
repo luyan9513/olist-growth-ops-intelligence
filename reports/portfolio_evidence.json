@@ -1,0 +1,342 @@
+{
+  "schema_version": "portfolio_evidence_v1",
+  "generated_at_utc": "2026-08-02T10:45:38.475418+00:00",
+  "data_scale": {
+    "mql_count": 8000,
+    "closed_deal_count": 842,
+    "order_count": 99441,
+    "order_item_count": 112650,
+    "review_count": 99224,
+    "seller_count": 3095
+  },
+  "business_overview": {
+    "won_count": 841,
+    "conversion_rate": 0.105125,
+    "delivered_orders": 96478,
+    "delivered_gmv": 15419773.749999039,
+    "delay_rate": 0.08112898544715784,
+    "low_review_rate": 0.14189568716361817
+  },
+  "channels": [
+    {
+      "origin": "organic_search",
+      "mql_count": 2296.0,
+      "won_count": 270.0,
+      "conversion_rate": 0.11759581881533102,
+      "acquired_seller_count": 270,
+      "active_seller_count": 110,
+      "delivered_gmv": 233047.2,
+      "delivered_order_count": 1190.0,
+      "gmv_per_acquired_seller": 863.1377777777778,
+      "delay_rate": 0.04873949579831933,
+      "low_review_rate": 0.09523809523809523
+    },
+    {
+      "origin": "paid_search",
+      "mql_count": 1586.0,
+      "won_count": 195.0,
+      "conversion_rate": 0.12295081967213115,
+      "acquired_seller_count": 195,
+      "active_seller_count": 100,
+      "delivered_gmv": 177836.38,
+      "delivered_order_count": 1234.0,
+      "gmv_per_acquired_seller": 911.981435897436,
+      "delay_rate": 0.07467532467532467,
+      "low_review_rate": 0.1086082059533387
+    },
+    {
+      "origin": "social",
+      "mql_count": 1350.0,
+      "won_count": 75.0,
+      "conversion_rate": 0.05555555555555555,
+      "acquired_seller_count": 75,
+      "active_seller_count": 31,
+      "delivered_gmv": 51251.969999999994,
+      "delivered_order_count": 389.0,
+      "gmv_per_acquired_seller": 683.3595999999999,
+      "delay_rate": 0.06940874035989718,
+      "low_review_rate": 0.1096938775510204
+    },
+    {
+      "origin": "unknown",
+      "mql_count": 1159.0,
+      "won_count": 193.0,
+      "conversion_rate": 0.16652286453839515,
+      "acquired_seller_count": 193,
+      "active_seller_count": 84,
+      "delivered_gmv": 235592.52,
+      "delivered_order_count": 1276.0,
+      "gmv_per_acquired_seller": 1220.6866321243522,
+      "delay_rate": 0.09090909090909091,
+      "low_review_rate": 0.1435257410296412
+    },
+    {
+      "origin": "direct_traffic",
+      "mql_count": 499.0,
+      "won_count": 56.0,
+      "conversion_rate": 0.11222444889779559,
+      "acquired_seller_count": 56,
+      "active_seller_count": 31,
+      "delivered_gmv": 27470.550000000003,
+      "delivered_order_count": 191.0,
+      "gmv_per_acquired_seller": 490.5455357142858,
+      "delay_rate": 0.07853403141361257,
+      "low_review_rate": 0.13020833333333334
+    },
+    {
+      "origin": "email",
+      "mql_count": 493.0,
+      "won_count": 15.0,
+      "conversion_rate": 0.030425963488843813,
+      "acquired_seller_count": 15,
+      "active_seller_count": 6,
+      "delivered_gmv": 9122.41,
+      "delivered_order_count": 22.0,
+      "gmv_per_acquired_seller": 608.1606666666667,
+      "delay_rate": 0.045454545454545456,
+      "low_review_rate": 0.09523809523809523
+    },
+    {
+      "origin": "referral",
+      "mql_count": 284.0,
+      "won_count": 24.0,
+      "conversion_rate": 0.08450704225352113,
+      "acquired_seller_count": 24,
+      "active_seller_count": 9,
+      "delivered_gmv": 18326.739999999998,
+      "delivered_order_count": 67.0,
+      "gmv_per_acquired_seller": 763.6141666666666,
+      "delay_rate": 0.029850746268656716,
+      "low_review_rate": 0.10144927536231885
+    },
+    {
+      "origin": "other",
+      "mql_count": 150.0,
+      "won_count": 4.0,
+      "conversion_rate": 0.02666666666666667,
+      "acquired_seller_count": 4,
+      "active_seller_count": 2,
+      "delivered_gmv": 8600.32,
+      "delivered_order_count": 86.0,
+      "gmv_per_acquired_seller": 2150.08,
+      "delay_rate": 0.12790697674418605,
+      "low_review_rate": 0.24719101123595505
+    },
+    {
+      "origin": "display",
+      "mql_count": 118.0,
+      "won_count": 6.0,
+      "conversion_rate": 0.05084745762711865,
+      "acquired_seller_count": 6,
+      "active_seller_count": 2,
+      "delivered_gmv": 1207.95,
+      "delivered_order_count": 7.0,
+      "gmv_per_acquired_seller": 201.32500000000002,
+      "delay_rate": 0.14285714285714285,
+      "low_review_rate": 0.2857142857142857
+    },
+    {
+      "origin": "other_publicities",
+      "mql_count": 65.0,
+      "won_count": 3.0,
+      "conversion_rate": 0.046153846153846156,
+      "acquired_seller_count": 3,
+      "active_seller_count": 0,
+      "delivered_gmv": 0.0,
+      "delivered_order_count": 0.0,
+      "gmv_per_acquired_seller": 0.0,
+      "delay_rate": NaN,
+      "low_review_rate": NaN
+    }
+  ],
+  "seller_segments": [
+    {
+      "seller_segment": "高价值",
+      "seller_count": 575,
+      "delivered_gmv": 8814641.229999995,
+      "delivered_order_count": 53953.0
+    },
+    {
+      "seller_segment": "高价值高风险",
+      "seller_count": 199,
+      "delivered_gmv": 4059451.6199999996,
+      "delivered_order_count": 24348.0
+    },
+    {
+      "seller_segment": "常规关注",
+      "seller_count": 2222,
+      "delivered_gmv": 2236060.609999998,
+      "delivered_order_count": 16411.0
+    },
+    {
+      "seller_segment": "体验风险",
+      "seller_count": 99,
+      "delivered_gmv": 309620.28999999986,
+      "delivered_order_count": 3107.0
+    }
+  ],
+  "model_comparisons": [
+    {
+      "task": "线索成交排序",
+      "selected_model": "random_forest",
+      "metric": "pr_auc",
+      "baseline": 0.11900655398413246,
+      "selected": 0.1932315704902779,
+      "absolute_improvement": 0.07422501650614544,
+      "lower_is_better": false
+    },
+    {
+      "task": "订单低评分风险",
+      "selected_model": "logistic_regression",
+      "metric": "pr_auc",
+      "baseline": 0.1095479704797048,
+      "selected": 0.19675693672000205,
+      "absolute_improvement": 0.08720896624029725,
+      "lower_is_better": false
+    },
+    {
+      "task": "品类周需求",
+      "selected_model": "hist_gradient_boosting",
+      "metric": "wape",
+      "baseline": 0.32678103407195613,
+      "selected": 0.31310359237730606,
+      "absolute_improvement": 0.013677441694650072,
+      "lower_is_better": true
+    },
+    {
+      "task": "商家周订单量",
+      "selected_model": "two_stage_expected",
+      "metric": "wape",
+      "baseline": 0.8694834935006487,
+      "selected": 0.8445865434696233,
+      "absolute_improvement": 0.024896950031025433,
+      "lower_is_better": true
+    },
+    {
+      "task": "商家下周活动",
+      "selected_model": "two_stage_classifier",
+      "metric": "pr_auc",
+      "baseline": 0.20617335971072256,
+      "selected": 0.6802979370552857,
+      "absolute_improvement": 0.47412457734456315,
+      "lower_is_better": false
+    }
+  ],
+  "model_operating_metrics": {
+    "lead_top20_lift": 1.7675062468765619,
+    "lead_top20_recall": 0.3536231884057971,
+    "review_top10_lift": 2.315433472227841,
+    "review_top10_recall": 0.23157894736842105,
+    "review_calibrated_brier": 0.09721326723718587
+  },
+  "operations": {
+    "scored_seller_count": 3051,
+    "risk_join_coverage": 0.9857835218093699,
+    "action_counts": {
+      "P1 履约护航": 158,
+      "P2 增长承接": 178,
+      "P3 风险巡检": 55,
+      "P4 重点经营": 173,
+      "P5 常规观察": 2487
+    },
+    "capacity": 200,
+    "strategy_comparison": [
+      {
+        "strategy": "统一行动规则",
+        "available_count": 3051,
+        "selected_count": 200,
+        "predicted_activity_mass_coverage": 0.20195403531396233,
+        "expected_order_count_coverage": 0.3347757744035762,
+        "latest_13w_gmv_coverage": 0.3461458719697909,
+        "high_value_high_risk_count": 199,
+        "selected_high_value_high_risk_count": 158,
+        "high_value_high_risk_coverage": 0.7939698492462312
+      },
+      {
+        "strategy": "仅活动概率",
+        "available_count": 3051,
+        "selected_count": 200,
+        "predicted_activity_mass_coverage": 0.28137331264028387,
+        "expected_order_count_coverage": 0.5352302506828839,
+        "latest_13w_gmv_coverage": 0.45539817477397004,
+        "high_value_high_risk_count": 199,
+        "selected_high_value_high_risk_count": 45,
+        "high_value_high_risk_coverage": 0.22613065326633167
+      },
+      {
+        "strategy": "仅近期GMV",
+        "available_count": 3051,
+        "selected_count": 200,
+        "predicted_activity_mass_coverage": 0.22733971133041989,
+        "expected_order_count_coverage": 0.4458753062845621,
+        "latest_13w_gmv_coverage": 0.6075437735337345,
+        "high_value_high_risk_count": 199,
+        "selected_high_value_high_risk_count": 53,
+        "high_value_high_risk_coverage": 0.2663316582914573
+      }
+    ]
+  },
+  "experiment_readiness": {
+    "status": "仅完成离线实验前规划，尚无真实干预与效果结果",
+    "primary_metric": "low_review_rate",
+    "baseline_rate": 0.14189568716361817,
+    "target_absolute_decrease": 0.03,
+    "alpha": 0.05,
+    "power": 0.8,
+    "required_total_sample": 3864,
+    "current_p1_candidate_count": 158,
+    "current_candidate_mde": 0.12098756261607267
+  },
+  "data_quality": {
+    "rule_count": 14,
+    "warning_rule_count": 5,
+    "issue_rules": [
+      {
+        "rule_id": "DQ-04",
+        "rule_name": "成交早于首次接触",
+        "severity": "warn",
+        "checked_count": 842,
+        "issue_count": 1.0,
+        "issue_rate": 0.0011876484560570072
+      },
+      {
+        "rule_id": "DQ-08",
+        "rule_name": "订单时间顺序异常",
+        "severity": "warn",
+        "checked_count": 99441,
+        "issue_count": 189.0,
+        "issue_rate": 0.0019006244909041542
+      },
+      {
+        "rule_id": "DQ-10",
+        "rule_name": "订单存在多条评价",
+        "severity": "warn",
+        "checked_count": 98673,
+        "issue_count": 547.0,
+        "issue_rate": 0.00554356308209946
+      },
+      {
+        "rule_id": "DQ-13",
+        "rule_name": "已交付订单缺少延迟判断时间",
+        "severity": "warn",
+        "checked_count": 96478,
+        "issue_count": 8.0,
+        "issue_rate": 8.292045855013578e-05
+      },
+      {
+        "rule_id": "DQ-14",
+        "rule_name": "订单商品无法关联品类",
+        "severity": "warn",
+        "checked_count": 112650,
+        "issue_count": 1603.0,
+        "issue_rate": 0.014229915667998225
+      }
+    ]
+  },
+  "boundaries": [
+    "所有业务结论来自 Olist 匿名公开历史数据，不代表当前市场或线上效果。",
+    "容量覆盖是离线排序对照，不是增量订单、利润、ROI 或因果效果。",
+    "实验模块只有样本量、MDE、分组和日志契约，没有真实干预结果。",
+    "需求预测缺少库存、促销和曝光数据，只能支持资源规划演示。"
+  ]
+}

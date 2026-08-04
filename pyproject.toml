@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "olist-growth-ops-intelligence"
+version = "1.0.0"
+description = "基于 Olist 公开历史数据的商家增长与履约运营分析平台"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Portfolio project; see THIRD_PARTY_NOTICES.md and source data terms"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["."]
+
+[tool.setuptools]
+packages = ["src"]

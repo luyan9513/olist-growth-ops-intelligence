@@ -1,0 +1,17 @@
+project:
+  name: olist-growth-ops-intelligence
+  timezone_note: "公开数据未提供可靠时区，保留原始无时区时间戳"
+paths:
+  raw_data: data/raw
+  database: data/processed/olist.duckdb
+  artifacts: artifacts
+modeling:
+  random_seed: 42
+  top_k_fraction: 0.20
+  split:
+    train_fraction: 0.65
+    validation_fraction: 0.15
+    test_fraction: 0.20
+privacy:
+  publish_review_text: false
+  publish_precise_geolocation: false

@@ -1,0 +1,383 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "商家增长与履约运营智能平台：决策证据报告",
+    "description": "基于 Olist 匿名公开历史数据的作品集证据，不代表线上效果或 ROI。",
+    "generatedAt": "2026-08-02T10:45:38.475418+00:00",
+    "sources": [
+      {
+        "id": "analysis",
+        "label": "业务分析快照",
+        "path": "artifacts/analysis_snapshot.json",
+        "query": {
+          "description": "DuckDB mart 汇总后的数据规模、漏斗、履约与商家分群证据"
+        }
+      },
+      {
+        "id": "models",
+        "label": "模型评估产物",
+        "path": "artifacts/*/metrics.json",
+        "query": {
+          "description": "时间切分测试集上的基线、所选模型和容量指标"
+        }
+      },
+      {
+        "id": "ops",
+        "label": "商家行动元数据",
+        "path": "artifacts/demand_forecast/seller_ops_metadata.json",
+        "query": {
+          "description": "相同容量下三种离线排序策略的覆盖对照"
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "strategy_chart",
+        "title": "容量 200 的策略覆盖对照",
+        "dataset": "strategy_coverage",
+        "source": {
+          "id": "portfolio_strategy_query",
+          "label": "容量策略覆盖查询",
+          "path": "reports/portfolio_evidence.json",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "description": "展开统一证据中的容量 200 策略，并转换为长表供分组柱图使用",
+            "sql": "with wide as (\n  select unnest(operations.strategy_comparison, recursive := true)\n  from read_json_auto('reports/portfolio_evidence.json')\n), tidy as (\n  unpivot wide on high_value_high_risk_coverage, predicted_activity_mass_coverage,\n    latest_13w_gmv_coverage into name metric value coverage\n)\nselect strategy,\n  case metric\n    when 'high_value_high_risk_coverage' then '高价值高风险覆盖'\n    when 'predicted_activity_mass_coverage' then '活动概率质量覆盖'\n    when 'latest_13w_gmv_coverage' then '近13周GMV覆盖'\n  end as metric,\n  coverage\nfrom tidy",
+            "tables_used": [
+              "reports/portfolio_evidence.json"
+            ],
+            "metric_definitions": [
+              "覆盖率=入选队列对应指标总量/全部可评分商家对应指标总量"
+            ]
+          }
+        },
+        "type": "bar",
+        "encodings": {
+          "x": {
+            "field": "metric",
+            "type": "nominal",
+            "title": "覆盖指标"
+          },
+          "y": {
+            "field": "coverage",
+            "type": "quantitative",
+            "title": "覆盖率",
+            "format": "percent"
+          },
+          "color": {
+            "field": "strategy",
+            "type": "nominal",
+            "title": "排序策略"
+          }
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "grouped"
+        }
+      },
+      {
+        "id": "segment_chart",
+        "title": "商家分群的历史已交付 GMV",
+        "dataset": "seller_segments",
+        "source": {
+          "id": "portfolio_segment_query",
+          "label": "商家分群查询",
+          "path": "reports/portfolio_evidence.json",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "description": "展开统一证据中的商家分群汇总",
+            "sql": "select unnest(seller_segments, recursive := true) from read_json_auto('reports/portfolio_evidence.json') order by delivered_gmv desc",
+            "tables_used": [
+              "reports/portfolio_evidence.json"
+            ],
+            "metric_definitions": [
+              "已交付GMV=已交付订单的商品价与运费之和"
+            ]
+          }
+        },
+        "type": "bar",
+        "encodings": {
+          "x": {
+            "field": "seller_segment",
+            "type": "nominal",
+            "title": "商家分群"
+          },
+          "y": {
+            "field": "delivered_gmv",
+            "type": "quantitative",
+            "title": "已交付 GMV",
+            "format": "currency"
+          }
+        },
+        "options": {
+          "orientation": "vertical"
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "model_table",
+        "title": "模型与简单基线对照",
+        "dataset": "model_comparisons",
+        "source": {
+          "id": "portfolio_model_query",
+          "label": "模型对照查询",
+          "path": "reports/portfolio_evidence.json",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "description": "展开统一证据中的模型与简单基线对照",
+            "sql": "select unnest(model_comparisons, recursive := true) from read_json_auto('reports/portfolio_evidence.json') order by task",
+            "tables_used": [
+              "reports/portfolio_evidence.json"
+            ],
+            "metric_definitions": [
+              "PR-AUC 越高越好；WAPE 越低越好；均为时间外测试或回测结果"
+            ]
+          }
+        },
+        "columns": [
+          {
+            "field": "task",
+            "label": "任务"
+          },
+          {
+            "field": "selected_model",
+            "label": "所选模型"
+          },
+          {
+            "field": "metric",
+            "label": "指标"
+          },
+          {
+            "field": "baseline",
+            "label": "基线"
+          },
+          {
+            "field": "selected",
+            "label": "所选模型结果"
+          }
+        ],
+        "defaultSort": {
+          "field": "task",
+          "direction": "asc"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 商家增长与履约运营智能平台：决策证据报告"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\n项目把获客、成交、商家经营、履约与体验串成一条可追溯决策链。主要价值是可测试口径、时间安全模型和容量受限行动清单；所有结果均为公开历史数据下的离线证据。"
+      },
+      {
+        "id": "ops_text",
+        "type": "markdown",
+        "body": "## 运营策略取舍\n\n统一规则优先保护高价值高风险商家；仅活动概率和仅近期 GMV 策略在各自目标上覆盖更高。图中展示的是相同容量下的历史排序覆盖，不是因果收益。"
+      },
+      {
+        "id": "strategy_block",
+        "type": "chart",
+        "chartId": "strategy_chart"
+      },
+      {
+        "id": "seller_text",
+        "type": "markdown",
+        "body": "## 商家经营分层\n\n分群同时保留价值和体验风险，避免只按 GMV 排序。"
+      },
+      {
+        "id": "segment_block",
+        "type": "chart",
+        "chartId": "segment_chart"
+      },
+      {
+        "id": "model_text",
+        "type": "markdown",
+        "body": "## 模型证据\n\n所有模型均按时间切分并与简单基线比较。WAPE 越低越好，PR-AUC 越高越好；结果不外推为线上提升。"
+      },
+      {
+        "id": "model_block",
+        "type": "table",
+        "tableId": "model_table"
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## 下一步与限制\n\n下一步应接入真实动作日志并跨周积累成熟样本，用预注册指标完成 ITT 评估。当前没有真实干预、成本、利润或 ROI 结果。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-08-02T10:45:38.475418+00:00",
+    "datasets": {
+      "headline": [
+        {
+          "mql_count": 8000,
+          "closed_deal_count": 842,
+          "order_count": 99441,
+          "order_item_count": 112650,
+          "review_count": 99224,
+          "seller_count": 3095,
+          "high_risk_count": 199
+        }
+      ],
+      "strategy_coverage": [
+        {
+          "strategy": "统一行动规则",
+          "metric": "高价值高风险覆盖",
+          "coverage": 0.7939698492462312
+        },
+        {
+          "strategy": "统一行动规则",
+          "metric": "活动概率质量覆盖",
+          "coverage": 0.20195403531396233
+        },
+        {
+          "strategy": "统一行动规则",
+          "metric": "近13周GMV覆盖",
+          "coverage": 0.3461458719697909
+        },
+        {
+          "strategy": "仅活动概率",
+          "metric": "高价值高风险覆盖",
+          "coverage": 0.22613065326633167
+        },
+        {
+          "strategy": "仅活动概率",
+          "metric": "活动概率质量覆盖",
+          "coverage": 0.28137331264028387
+        },
+        {
+          "strategy": "仅活动概率",
+          "metric": "近13周GMV覆盖",
+          "coverage": 0.45539817477397004
+        },
+        {
+          "strategy": "仅近期GMV",
+          "metric": "高价值高风险覆盖",
+          "coverage": 0.2663316582914573
+        },
+        {
+          "strategy": "仅近期GMV",
+          "metric": "活动概率质量覆盖",
+          "coverage": 0.22733971133041989
+        },
+        {
+          "strategy": "仅近期GMV",
+          "metric": "近13周GMV覆盖",
+          "coverage": 0.6075437735337345
+        }
+      ],
+      "seller_segments": [
+        {
+          "seller_segment": "高价值",
+          "seller_count": 575,
+          "delivered_gmv": 8814641.229999995,
+          "delivered_order_count": 53953.0
+        },
+        {
+          "seller_segment": "高价值高风险",
+          "seller_count": 199,
+          "delivered_gmv": 4059451.6199999996,
+          "delivered_order_count": 24348.0
+        },
+        {
+          "seller_segment": "常规关注",
+          "seller_count": 2222,
+          "delivered_gmv": 2236060.609999998,
+          "delivered_order_count": 16411.0
+        },
+        {
+          "seller_segment": "体验风险",
+          "seller_count": 99,
+          "delivered_gmv": 309620.28999999986,
+          "delivered_order_count": 3107.0
+        }
+      ],
+      "model_comparisons": [
+        {
+          "task": "线索成交排序",
+          "selected_model": "random_forest",
+          "metric": "pr_auc",
+          "baseline": 0.11900655398413246,
+          "selected": 0.1932315704902779,
+          "absolute_improvement": 0.07422501650614544,
+          "lower_is_better": false
+        },
+        {
+          "task": "订单低评分风险",
+          "selected_model": "logistic_regression",
+          "metric": "pr_auc",
+          "baseline": 0.1095479704797048,
+          "selected": 0.19675693672000205,
+          "absolute_improvement": 0.08720896624029725,
+          "lower_is_better": false
+        },
+        {
+          "task": "品类周需求",
+          "selected_model": "hist_gradient_boosting",
+          "metric": "wape",
+          "baseline": 0.32678103407195613,
+          "selected": 0.31310359237730606,
+          "absolute_improvement": 0.013677441694650072,
+          "lower_is_better": true
+        },
+        {
+          "task": "商家周订单量",
+          "selected_model": "two_stage_expected",
+          "metric": "wape",
+          "baseline": 0.8694834935006487,
+          "selected": 0.8445865434696233,
+          "absolute_improvement": 0.024896950031025433,
+          "lower_is_better": true
+        },
+        {
+          "task": "商家下周活动",
+          "selected_model": "two_stage_classifier",
+          "metric": "pr_auc",
+          "baseline": 0.20617335971072256,
+          "selected": 0.6802979370552857,
+          "absolute_improvement": 0.47412457734456315,
+          "lower_is_better": false
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "analysis",
+      "label": "业务分析快照",
+      "path": "artifacts/analysis_snapshot.json",
+      "query": {
+        "description": "DuckDB mart 汇总后的数据规模、漏斗、履约与商家分群证据"
+      }
+    },
+    {
+      "id": "models",
+      "label": "模型评估产物",
+      "path": "artifacts/*/metrics.json",
+      "query": {
+        "description": "时间切分测试集上的基线、所选模型和容量指标"
+      }
+    },
+    {
+      "id": "ops",
+      "label": "商家行动元数据",
+      "path": "artifacts/demand_forecast/seller_ops_metadata.json",
+      "query": {
+        "description": "相同容量下三种离线排序策略的覆盖对照"
+      }
+    }
+  ]
+}

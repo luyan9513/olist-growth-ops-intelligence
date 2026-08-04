@@ -1,0 +1,11 @@
+# 2026-07-30 在 Python 3.12.13 / macOS arm64 上实装验证的直接依赖。
+# 重新安装后用 scripts/check_environment.py 核对版本。
+dbt-duckdb==1.10.1
+duckdb==1.5.5
+pandas==3.0.5
+pyarrow==24.0.0
+scikit-learn==1.9.0
+plotly==6.9.0
+streamlit==1.60.0
+pytest==9.1.1
+PyYAML==6.0.3

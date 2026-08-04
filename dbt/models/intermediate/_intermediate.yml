@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: int_lead_deals
+    columns:
+      - name: mql_id
+        data_tests: [not_null, unique]
+  - name: int_seller_acquisition
+    columns:
+      - name: seller_id
+        data_tests: [not_null, unique]
+  - name: int_order_reviews
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+  - name: int_order_payments
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+  - name: int_order_seller_items
+    columns:
+      - name: gross_value
+        data_tests: [is_non_negative]
+  - name: int_order_enriched
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]

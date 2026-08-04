@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: mart_channel_funnel
+    description: 首次接触月和渠道粒度的 MQL 与成交漏斗。
+    columns:
+      - name: conversion_rate
+        data_tests:
+          - accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+  - name: mart_seller_performance
+    description: 商家月度经营和体验指标。
+  - name: mart_delivery_experience
+    description: 订单粒度的履约体验主题表；多卖家订单保留主卖家和卖家数。
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+  - name: mart_lead_features
+    description: 线索首次接触时可用特征与成交标签；禁止加入成交后字段。
+    columns:
+      - name: mql_id
+        data_tests: [not_null, unique]
+      - name: prediction_at
+        data_tests: [not_null]
+  - name: mart_review_risk_features
+    description: 订单粒度的下单时商品/路线特征、严格在下单前发生的卖家及全局历史结果、平滑风险率和低评分标签。
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+      - name: seller_smoothed_delay_rate
+        data_tests:
+          - accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {where: "seller_smoothed_delay_rate is not null"}
+      - name: seller_smoothed_low_review_rate
+        data_tests:
+          - accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {where: "seller_smoothed_low_review_rate is not null"}
+  - name: mart_demand_weekly
+    description: 商家-品类-周的需求基础序列，缺失周由 Python 特征层补零。
+  - name: mart_channel_seller_value
+    description: 渠道成交商家的后续经营与体验质量。
+  - name: mart_channel_summary
+    description: 渠道粒度的去重成交商家及其全生命周期经营质量，避免跨月重复计数。
+    columns:
+      - name: origin
+        data_tests: [not_null, unique]
+  - name: mart_seller_risk
+    description: 高 GMV 与高延迟/低评分风险的商家优先级清单。
+    columns:
+      - name: seller_id
+        data_tests: [not_null, unique]
+  - name: mart_seller_windows
+    description: 以数据最大购买时间为截点的商家近 30/60/90 天经营指标。
+    columns:
+      - name: seller_id
+        data_tests: [not_null, unique]
+  - name: mart_delivery_breakdown
+    description: 品类、卖家州和客户州维度的履约与低评分拆解。
+  - name: mart_data_quality
+    description: 数据质量规则的异常数、分母和异常率。
+    columns:
+      - name: rule_id
+        data_tests: [not_null, unique]

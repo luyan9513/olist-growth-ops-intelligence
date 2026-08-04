@@ -1,0 +1,30 @@
+schema_version: rollout_readiness_v1
+project_status: offline_portfolio_complete
+claim_boundary: 公开历史数据下的离线分析、预测、排序与实验规划
+gates:
+  business_owner_confirmed:
+    status: pending_real_environment
+    evidence_required: 业务负责人、运营执行负责人和数据负责人名单
+  live_data_contract_ready:
+    status: pending_real_environment
+    evidence_required: 线上表、字段、刷新时效、主键和结果成熟窗口
+  privacy_and_access_approved:
+    status: pending_real_environment
+    evidence_required: 权限审批、脱敏方案、保存周期和审计记录
+  intervention_defined:
+    status: pending_real_environment
+    evidence_required: 干预动作、单次成本、容量、互斥条件和停止规则
+  experiment_registered:
+    status: pending_real_environment
+    evidence_required: 实验 ID、主指标、护栏、样本量、随机化单位和分析计划
+  execution_logging_ready:
+    status: template_only
+    evidence_required: assignment、execution、outcome 日志的真实写入与质量检查
+  causal_result_available:
+    status: not_available
+    evidence_required: 预设成熟窗口后的 ITT 结果、区间估计、护栏和异常说明
+forbidden_claims_before_all_gates_pass:
+  - 真实 ROI
+  - 增量成交
+  - 降低差评
+  - 已上线并产生业务收益

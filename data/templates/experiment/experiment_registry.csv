@@ -1,0 +1,1 @@
+experiment_id,experiment_name,owner,decision_question,assignment_unit,eligibility_rule,treatment_name,control_name,primary_metric,guardrail_metrics,planned_start_date,planned_end_date,timezone,alpha,power,status,design_version

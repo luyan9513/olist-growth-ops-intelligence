@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: stg_marketing_qualified_leads
+    description: 一行一条营销合格线索，保留预测时点可用字段。
+    columns:
+      - name: mql_id
+        data_tests: [not_null, unique]
+      - name: first_contact_at
+        data_tests: [not_null]
+  - name: stg_closed_deals
+    description: 成交记录；一对多问题由质量层检查，不在 staging 静默去重。
+    columns:
+      - name: mql_id
+        data_tests: [not_null]
+      - name: won_at
+        data_tests: [not_null]
+  - name: stg_sellers
+    columns:
+      - name: seller_id
+        data_tests: [not_null, unique]
+  - name: stg_orders
+    columns:
+      - name: order_id
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: purchased_at
+        data_tests: [not_null]
+  - name: stg_order_items
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: seller_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_sellers')
+                field: seller_id
+      - name: price
+        data_tests: [is_non_negative]
+      - name: freight_value
+        data_tests: [is_non_negative]
+  - name: stg_order_payments
+    columns:
+      - name: payment_value
+        data_tests: [is_non_negative]
+  - name: stg_order_reviews
+    columns:
+      - name: review_score
+        data_tests:
+          - accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 5
+  - name: stg_products
+    columns:
+      - name: product_id
+        data_tests: [not_null, unique]
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        data_tests: [not_null, unique]

@@ -1,0 +1,18 @@
+[client]
+toolbarMode = "viewer"
+
+[theme]
+base = "light"
+primaryColor = "#0F6CBD"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F6FA"
+textColor = "#172033"
+linkColor = "#0F6CBD"
+font = "sans-serif"
+baseRadius = "medium"
+showSidebarBorder = true
+chartCategoricalColors = ["#0F6CBD", "#12A594", "#F59E0B", "#E45756", "#7C3AED", "#64748B"]
+
+[theme.sidebar]
+backgroundColor = "#F3F6FA"
+secondaryBackgroundColor = "#E7EDF5"

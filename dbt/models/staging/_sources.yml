@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    description: Olist 公开匿名 CSV，仅在本地读取，原始文件不进入版本库。
+    tables:
+      - name: marketing_qualified_leads
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_marketing_qualified_leads_dataset.csv', all_varchar=true, header=true)"
+      - name: closed_deals
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_closed_deals_dataset.csv', all_varchar=true, header=true)"
+      - name: sellers
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_sellers_dataset.csv', all_varchar=true, header=true)"
+      - name: orders
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_orders_dataset.csv', all_varchar=true, header=true)"
+      - name: order_items
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_order_items_dataset.csv', all_varchar=true, header=true)"
+      - name: order_payments
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_order_payments_dataset.csv', all_varchar=true, header=true)"
+      - name: order_reviews
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_order_reviews_dataset.csv', all_varchar=true, header=true)"
+      - name: products
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_products_dataset.csv', all_varchar=true, header=true)"
+      - name: customers
+        config:
+          external_location: "read_csv_auto('{{ var('raw_data_dir') }}/olist_customers_dataset.csv', all_varchar=true, header=true)"
