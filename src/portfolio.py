@@ -157,7 +157,7 @@ def validate_portfolio_evidence(evidence: dict[str, Any]) -> None:
 
 
 def render_portfolio_case_study(e: dict[str, Any]) -> str:
-    """把统一证据渲染为适合招聘方阅读的案例说明。"""
+    """把统一证据渲染为适合项目审阅者阅读的案例说明。"""
 
     scale, biz = e["data_scale"], e["business_overview"]
     ops = e["operations"]["strategy_comparison"][0]

@@ -45,9 +45,9 @@
 
 详细口径见 `01_requirements_and_metrics.md`和 `metric_dictionary.md`，数据边界见 `03_data_design.md`，实验边界见 `07_intervention_and_experiment_design.md`，基础真实构建见 `logs/2026-07-30_real_data_validation.md`，P9 两阶段模型见 `logs/2026-08-01_p9_intermittent_demand_development.md`，P10 行动决策层见 `logs/2026-08-01_p10_seller_ops_actioning.md`，P11 实验框架见 `logs/2026-08-01_p11_intervention_experiment_framework.md`。
 
-## 7. P12 投递验收结论
+## 7. P12 展示验收结论
 
-P12 没有训练新模型，也没有新增业务效果数字。它把当前权威产物生成成 `portfolio_evidence.json`、案例报告和原生可视化报告，并用自动检查防止后续重跑后材料仍引用旧数字。快速验收实际检查了 5 条简历 bullet、20 个面试问题、0 个无效内部链接、4 张 1440×1000 PNG，以及作品集证据和 10 页看板；17 项专项测试通过。全量 62 项 Python 测试与 dbt 回归也通过，dbt 两条历史数据告警保持不变。
+P12 没有训练新模型，也没有新增业务效果数字。它把当前权威产物生成成 `portfolio_evidence.json`、案例报告和原生可视化报告，并用自动检查防止后续重跑后材料仍引用旧数字。快速验收检查了内部链接、4 张 1440×1000 PNG、项目证据和 10 页看板。全量 Python 测试与 dbt 回归也通过，dbt 两条历史数据告警保持不变。
 
 截图阶段真实发现并修复了 Streamlit 入口遮蔽 `app` 包、导入缓存导致新会话不渲染的问题。最终使用根目录 `streamlit_app.py` 调用显式 `main()`，四张截图均由修复后的本地服务生成并目视确认。原生报告在渲染前通过结构校验，包含 4 个有界数据集、3 类来源、2 张原生图和 1 张模型对照表。详细过程见 `logs/2026-08-02_p12_portfolio_delivery.md`。
 

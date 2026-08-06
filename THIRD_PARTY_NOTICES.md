@@ -22,6 +22,6 @@
 
 - Brazilian E-Commerce Public Dataset by Olist：https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce，CC BY-NC-SA 4.0，核对日期 2026-07-30；
 - Marketing Funnel by Olist：https://www.kaggle.com/datasets/olistbr/marketing-funnel-olist，CC BY-NC-SA 4.0，核对日期 2026-07-30；
-- 本项目不提交原始数据，分析产物用于非商业求职作品集，并保留来源署名和相同方式共享要求。
+- 本项目不提交原始数据，分析产物仅用于非商业项目展示，并保留来源署名和相同方式共享要求。
 
 如后续复用第三方代码，本文件必须在同一阶段更新上游 URL、精确 commit、复用文件、许可证、版权/NOTICE 和本项目修改内容，并保留许可证要求的原文文件。

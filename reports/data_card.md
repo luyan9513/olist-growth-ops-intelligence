@@ -2,7 +2,7 @@
 
 ## 用途、来源与许可
 
-数据用于非商业求职作品集中的渠道漏斗、商家经营、履约体验和离线预测。来自 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) 和 [Marketing Funnel by Olist](https://www.kaggle.com/datasets/olistbr/marketing-funnel-olist)。2026-07-30 核对时两个页面均标注 CC BY-NC-SA 4.0；项目不提交原始 CSV，只用于署名、非商业、相同方式共享场景。
+数据用于非商业项目展示中的渠道漏斗、商家经营、履约体验和离线预测。来自 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) 和 [Marketing Funnel by Olist](https://www.kaggle.com/datasets/olistbr/marketing-funnel-olist)。2026-07-30 核对时两个页面均标注 CC BY-NC-SA 4.0；项目不提交原始 CSV，只用于署名、非商业、相同方式共享场景。
 
 ## 本地数据范围
 

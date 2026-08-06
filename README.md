@@ -6,7 +6,7 @@
 
 基于 Olist 匿名公开历史数据，串联“线索获取 → 商家成交 → 商家经营 → 订单履约 → 用户体验”的本地分析、预测与运营决策项目。
 
-> 当前状态：已使用 11 个 Olist 官方公开 CSV 完成真实 dbt 构建、三类模型回测、统一商家运营行动清单、干预实验设计框架、10 页 Streamlit 看板、投递版案例报告、无数据 CI 和发布前仓库检查。没有真实渠道成本和干预结果，项目不宣称真实 ROI、线上提升或因果效果。
+> 当前状态：已使用 11 个 Olist 官方公开 CSV 完成真实 dbt 构建、三类模型回测、统一商家运营行动清单、干预实验设计框架、10 页 Streamlit 看板、案例报告、无数据 CI 和发布前仓库检查。没有真实渠道成本和干预结果，项目不宣称真实 ROI、线上提升或因果效果。
 
 ## 文档入口
 
@@ -27,14 +27,10 @@
 - [线索模型卡](reports/models/lead_conversion_model_card.md)
 - [低评分模型卡](reports/models/review_risk_model_card.md)
 - [需求预测模型卡](reports/models/demand_forecast_model_card.md)
-- [面试指南](docs/interview_guide.md)
-- [P12 作品集演示指南](docs/08_portfolio_demo_guide.md)
-- [发布与岗位包装设计](docs/09_release_and_role_packaging.md)
+- [项目演示指南](docs/08_portfolio_demo_guide.md)
+- [仓库发布设计](docs/09_repository_release.md)
 - [真实业务落地手册](docs/10_real_world_rollout_playbook.md)
-- [投递版案例报告](reports/portfolio_case_study.md)
-- [5 条简历 Bullet](reports/resume_bullets.md)
-- [四类岗位简历 Bullet](reports/resume_bullets_by_role.md)
-- [JD 定制检查清单](reports/jd_tailoring_checklist.md)
+- [项目案例报告](reports/portfolio_case_study.md)
 
 ## 本地环境
 
@@ -83,11 +79,11 @@ P10 将活动概率与商家价值、增长和履约风险一对一整合为 3,0
 
 P11 增加实验登记、稳定 SHA-256 草案分组、执行/结果日志契约、样本量/MDE 规划和日志质量校验。默认 P1 池有 158 个商家；若规划基线低评分率 14.19%、希望识别下降 3 个百分点、alpha 0.05、power 80%，近似需要 3,864 个成熟样本，当前池只能识别约 12.10 个百分点的下降。该结论用于说明实验可行性，不是预计效果；四张日志模板只有表头。
 
-P12 把当前分析、模型、行动和实验产物归并为统一证据 JSON、招聘方可读案例报告和原生可视化报告。四张关键截图均来自当前真实本地看板；`make portfolio-check` 会重新生成证据、对账权威产物、检查 5 条简历 bullet、20 个面试问题、内部链接和截图尺寸，并运行 17 个作品集/页面专项测试。
+P12 把当前分析、模型、行动和实验产物归并为统一证据 JSON、案例报告和原生可视化报告。四张关键截图均来自当前真实本地看板；`make portfolio-check` 会重新生成证据、对账权威产物、检查内部链接和截图尺寸，并运行作品集/页面专项测试。
 
-P13 补齐作品集发布层：GitHub Actions 使用 Python 3.12、只读仓库权限和 pip 缓存，CI 不依赖被忽略的原始数据、DuckDB 或模型二进制；仓库检查拒绝大于 5 MiB 的候选文件、数据产物和常见私钥标记。看板改用 Streamlit 官方主题配置、统一 Plotly 配色与原生折叠筛选，并重新生成四张真实截图。求职材料按数据分析、增长分析、商业分析和电商运营分析各给 5 条可核验 Bullet，同时提供真实环境 30/60/90 天落地闸门。
+P13 补齐项目发布层：GitHub Actions 使用 Python 3.12、只读仓库权限和 pip 缓存，CI 不依赖被忽略的原始数据、DuckDB 或模型二进制；仓库检查拒绝大于 5 MiB 的候选文件、数据产物和常见私钥标记。看板改用 Streamlit 官方主题配置、统一 Plotly 配色与原生折叠筛选，并重新生成四张真实截图，同时提供真实环境 30/60/90 天落地闸门。
 
-快速投递验收：
+快速展示验收：
 
 ```bash
 make portfolio-check

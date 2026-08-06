@@ -1,4 +1,4 @@
-"""校验作品集证据、投递材料、内部链接与演示截图。"""
+"""校验项目证据、内部链接与演示截图。"""
 
 from __future__ import annotations
 
@@ -37,15 +37,6 @@ def main() -> None:
     if comparable_evidence != comparable_expected:
         raise ValueError("作品集证据与当前分析/模型/行动产物不一致，请先运行 make portfolio-build")
 
-    bullets = (ROOT / "reports/resume_bullets.md").read_text(encoding="utf-8")
-    bullet_count = len(re.findall(r"^\d+\. ", bullets, flags=re.MULTILINE))
-    interview = (ROOT / "docs/interview_guide.md").read_text(encoding="utf-8")
-    question_count = len(re.findall(r"^\d+\. \*\*", interview, flags=re.MULTILINE))
-    if bullet_count != 5:
-        raise ValueError(f"简历 bullet 必须恰好 5 条，当前 {bullet_count} 条")
-    if question_count != 20:
-        raise ValueError(f"面试问题必须恰好 20 个，当前 {question_count} 个")
-
     markdown_files = [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md"))]
     broken_links = []
     for path in markdown_files:
@@ -75,7 +66,6 @@ def main() -> None:
 
     print(json.dumps({
         "status": "ok", "schema_version": evidence["schema_version"],
-        "resume_bullets": bullet_count, "interview_questions": question_count,
         "screenshots": sizes, "broken_links": 0,
     }, ensure_ascii=False))
 

@@ -1,4 +1,4 @@
--- 面试/代码审查入口：CTE、窗口函数和多表 JOIN 的实际实现位于 dbt/models。
+-- 代码审查入口：CTE、窗口函数和多表 JOIN 的实际实现位于 dbt/models。
 -- 本查询统一列出核心 mart 规模，具体血缘由 dbt docs 生成。
 with mart_counts as (
     select 'mart_channel_funnel' as mart_name, count(*) as row_count from marts.mart_channel_funnel

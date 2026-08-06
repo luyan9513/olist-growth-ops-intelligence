@@ -34,3 +34,6 @@ dbt/dbt_packages/
 .DS_Store
 .idea/
 .vscode/
+
+# Local-only career materials
+private/job_search/

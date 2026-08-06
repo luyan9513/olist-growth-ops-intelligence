@@ -1,6 +1,6 @@
 # 需求追踪矩阵
 
-状态以 2026-08-02 真实公开数据构建、P8/P9 模型结果、P10 行动清单、P11 实验设计框架和 P12 投递验收为准。原数据和 DuckDB 不进入 Git；所需产物均可按 README 复现。
+状态以 2026-08-02 真实公开数据构建、P8/P9 模型结果、P10 行动清单、P11 实验设计框架和 P12 展示验收为准。原数据和 DuckDB 不进入 Git；所需产物均可按 README 复现。
 
 | 需求 ID | 需求 | 实现文件 | 测试/验收 | 结果/证据 | 状态 |
 |---|---|---|---|---|---|
@@ -21,15 +21,14 @@
 | NFR-03 | 隐私安全 | `.gitignore`、数据卡 | 敏感模式扫描 | 原数据/模型产物不入 Git | 完成 |
 | NFR-04 | 性能 | 聚合 mart、Streamlit cache | 运行时记录 | dbt build 2.65 秒；本地环境数字 | 完成 |
 | NFR-05 | 可解释 | 特征重要性、分组误差、原因字段 | 产物存在性/模型卡 | 三份模型卡 | 完成 |
-| NFR-06 | 诚实表达 | 业务/技术报告、简历 | 占位符与 ROI/因果措辞检查 | 局限、告警、负面模型结果均披露 | 完成 |
+| NFR-06 | 诚实表达 | 业务/技术报告、案例报告 | 占位符与 ROI/因果措辞检查 | 局限、告警、负面模型结果均披露 | 完成 |
 | NFR-07 | 分类模型稳健性 | `src/evaluate.py`、`src/train.py`、模型卡 | 3 个滚动时间窗、500 次 bootstrap、独立校准测试 | 两任务 metrics JSON 已包含完整产物 | 完成 |
 | NFR-08 | 增强特征时间安全 | `mart_review_risk_features`、`src/features.py` | dbt 范围测试、禁用字段、严格历史截点测试 | `assert_review_history_is_strictly_prior` 通过 | 完成 |
 | NFR-09 | 商家间歇需求稳健性 | `src/forecast.py`、`src/train.py`、P9 测试、需求模型卡 | 活动特征反事实、Croston 历史截点、8 周逐周和活动层评估 | 39 项测试通过；两阶段对移动平均 7/8 周不劣；活动三层误差已披露 | 完成 |
 | FR-13 / NFR-10 | 统一商家运营行动清单 | `src/decisioning.py`、`src/train.py`、`app/pages/ops_actions.py`、P10 测试 | 一对一覆盖、规则互斥、排序确定性、容量边界、9 页看板渲染 | 3,051 行唯一清单；46 项测试通过；容量 200 高价值高风险覆盖 79.40% | 完成 |
 | FR-14 / NFR-11 | 干预与随机实验框架 | `src/experiments.py`、`app/pages/experiments.py`、`data/templates/experiment/`、`docs/07_intervention_and_experiment_design.md` | 公式边界/方向、稳定且行序无关分组、禁用结果分层、日志链路、10 页看板 | 58 项测试通过；P1 158 个候选对 3pp MDE 需 3,864；模板 0 行 | 完成 |
-| FR-15 / NFR-12 | 投递版作品集包装 | `docs/08_portfolio_demo_guide.md`、`reports/portfolio_case_study.md`、`src/portfolio.py`、`scripts/{build_portfolio_evidence.py,validate_portfolio.py,capture_dashboard_screenshots.mjs}`、4 张关键截图 | 原生报告校验通过；`make portfolio-check` 17 项专项通过；62 项全量 Python 通过；dbt 84 PASS/2 WARN/0 ERROR | `reports/portfolio_evidence.json`、`reports/portfolio_artifact.json`、`docs/assets/portfolio/`、P12 日志 | 完成 |
-| FR-16 / NFR-13 / NFR-14 | 仓库发布与无数据 CI | `.github/workflows/ci.yml`、PR/Issue 模板、`CONTRIBUTING.md`、`RELEASE_CHECKLIST.md`、`scripts/validate_repository.py` | `make ci`：最终 167 个候选文件检查通过、dbt parse 通过、64 项 Python 通过；真实 dbt build 84 PASS/2 WARN/0 ERROR | `docs/09_release_and_role_packaging.md`、P13 日志 | 完成 |
-| FR-17 | 四类岗位投递材料 | `reports/resume_bullets_by_role.md`、`reports/jd_tailoring_checklist.md`、README 与面试指南入口 | 仓库检查核对四版各 5 条；数字逐项取自 `portfolio_evidence.json`，明确离线/非 ROI 边界 | P13 日志 | 完成 |
+| FR-15 / NFR-12 | 项目展示与证据包装 | `docs/08_portfolio_demo_guide.md`、`reports/portfolio_case_study.md`、`src/portfolio.py`、`scripts/{build_portfolio_evidence.py,validate_portfolio.py,capture_dashboard_screenshots.mjs}`、4 张关键截图 | 原生报告校验通过；项目证据、内部链接、截图和页面专项测试通过；dbt 84 PASS/2 WARN/0 ERROR | `reports/portfolio_evidence.json`、`reports/portfolio_artifact.json`、`docs/assets/portfolio/`、P12 日志 | 完成 |
+| FR-16 / NFR-13 / NFR-14 | 仓库发布与无数据 CI | `.github/workflows/ci.yml`、PR/Issue 模板、`CONTRIBUTING.md`、`RELEASE_CHECKLIST.md`、`scripts/validate_repository.py` | `make ci`：dbt parse、仓库边界和 64 项 Python 测试；真实 dbt build 84 PASS/2 WARN/0 ERROR | `docs/09_repository_release.md`、P13/P14 日志 | 完成 |
 | FR-18 | 看板展示体验 | `.streamlit/config.toml`、`app/theme.py`、9 个图表页面、更新截图 | 10 页冒烟属于 64 项全量测试；4 张 1440×1000 PNG 真实浏览器生成、格式/尺寸自动检查并目视复核 | `docs/assets/portfolio/`、P13 日志 | 完成 |
 | NFR-15 | 托管 CI 与本地数据隔离 | `tests/test_streamlit_pages.py`、`tests/streamlit_fixtures.py`、`.github/workflows/ci.yml` | 首次 run `30891909430` 失败；本地无数据库路径 64/64；修复 run `30892648947` 全步骤成功 | P14 日志 | 完成 |
 
@@ -44,5 +43,5 @@
 | 模型怎么切分、评估和防泄漏 | `04_model_and_experiment_design.md`、`reports/models/` |
 | 干预如何记录、随机化和评估 | `07_intervention_and_experiment_design.md`、`reports/experiment_design_report.md` |
 | 实际结果、问题、结论和局限 | `06_validation_results_and_conclusions.md`、`logs/` |
-| 怎么在面试中介绍 | `interview_guide.md`、`08_portfolio_demo_guide.md`、`reports/portfolio_case_study.md`、`reports/resume_bullets.md`、`reports/resume_bullets_by_role.md` |
-| 怎么发布、真实业务如何落地 | `09_release_and_role_packaging.md`、`10_real_world_rollout_playbook.md`、`RELEASE_CHECKLIST.md` |
+| 怎么演示项目 | `08_portfolio_demo_guide.md`、`reports/portfolio_case_study.md` |
+| 怎么发布、真实业务如何落地 | `09_repository_release.md`、`10_real_world_rollout_playbook.md`、`RELEASE_CHECKLIST.md` |

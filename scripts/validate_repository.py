@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import re
 import subprocess
 from pathlib import Path
 
@@ -21,9 +20,8 @@ REQUIRED_FILES = (
     "README.md",
     "RELEASE_CHECKLIST.md",
     "THIRD_PARTY_NOTICES.md",
-    "docs/09_release_and_role_packaging.md",
+    "docs/09_repository_release.md",
     "docs/10_real_world_rollout_playbook.md",
-    "reports/resume_bullets_by_role.md",
 )
 FORBIDDEN_SUFFIXES = {".duckdb", ".joblib", ".pkl", ".pickle", ".parquet"}
 FORBIDDEN_NAMES = {".env", "secrets.toml"}
@@ -51,7 +49,8 @@ def repository_files() -> list[Path]:
         capture_output=True,
         text=True,
     )
-    return [ROOT / value for value in result.stdout.splitlines() if value]
+    candidates = [ROOT / value for value in result.stdout.splitlines() if value]
+    return [path for path in candidates if path.exists()]
 
 
 def validate() -> dict[str, object]:
@@ -83,17 +82,6 @@ def validate() -> dict[str, object]:
     workflow_path = ROOT / ".github/workflows/ci.yml"
     if workflow_path.exists():
         yaml.safe_load(workflow_path.read_text(encoding="utf-8"))
-
-    role_path = ROOT / "reports/resume_bullets_by_role.md"
-    if role_path.exists():
-        role_content = role_path.read_text(encoding="utf-8")
-        for role in ("数据分析", "增长分析", "商业分析", "电商运营分析"):
-            match = re.search(
-                rf"## {role}岗位\n(?P<body>.*?)(?=\n## |\Z)", role_content, re.DOTALL
-            )
-            count = len(re.findall(r"^\d+\. ", match.group("body"), re.MULTILINE)) if match else 0
-            if count != 5:
-                errors.append(f"{role}岗位应有 5 条简历 Bullet，实际 {count} 条")
 
     result: dict[str, object] = {
         "status": "pass" if not errors else "fail",
