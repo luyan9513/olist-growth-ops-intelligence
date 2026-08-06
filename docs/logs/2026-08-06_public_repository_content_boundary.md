@@ -2,7 +2,7 @@
 
 **日期：** 2026-08-06  
 **范围：** 将仅供个人使用的准备材料移出公开版本，同时保留项目案例、业务报告、模型卡、截图和可复现工程链路  
-**状态：** 本地代码与文档调整、完整性校验和本地回归已完成；远端历史重写与托管 CI 结果在本日志末尾补记
+**状态：** 已完成；本地隔离、历史过滤、远端 `main` 重写和托管 CI 均已验证
 
 ## 1. 背景与边界
 
@@ -112,3 +112,48 @@
 3. 历史重写会改变现有提交哈希；若有其他克隆，需要重新同步或重新克隆。当前检查只发现本地 `main` 和 `origin/main`，没有本地其他分支或标签。
 4. 即使远端分支不再引用旧对象，GitHub 对旧提交 URL 或缓存的清除不保证立即完成；这些材料不含密钥，如需处理真正敏感信息还应联系 GitHub Support。
 5. 当前 `gh` 登录无效。若 Git 凭据不能完成强制推送，需要用户重新登录后继续。
+
+## 7. 远端历史重写与托管复验
+
+用户在了解默认分支提交哈希变化、协作者需要重新同步、旧 URL/缓存可能暂时保留等风险后，明确授权重写远端 `main`。
+
+### 7.1 本地历史过滤
+
+使用 Git 自带 `filter-branch --index-filter`，只对第 2.1 节列出的 5 个精确旧路径执行 `git rm --cached --ignore-unmatch`。共重写 4 个提交，没有压平其他文件的开发历史。随后删除 `refs/original` 备份引用、过期全部本地 reflog，并运行 `git gc --prune=now`。
+
+过滤后验证：
+
+- `git rev-list --all --objects` 未找到 5 个旧路径；
+- `git fsck --full --no-reflogs --unreachable` 未报告相关不可达 commit 或 blob；
+- 5 个本地私有副本仍然存在且继续被 `.gitignore` 排除；
+- 清理后的本地提交序列为 `1a1e682`、`dc248e3`、`338566b`、`317c435`。
+
+### 7.2 远端保护式强制更新
+
+推送前记录远端旧 `main` 完整哈希 `9e39bee3eb7dfcab9d1fc979712c9c3387ff93d5`。第一次强制推送请求被执行环境的安全审核拒绝，原因是用户此前虽同意按建议处理，但尚未逐字明确授权重写默认分支。没有绕过安全审核；等待用户明确回复后才继续。
+
+最终执行带精确旧哈希的保护式推送：
+
+```text
+git push --force-with-lease=refs/heads/main:<清理前完整哈希> origin main
+```
+
+结果：远端 `main` 从 `9e39bee` 更新为 `317c435`，输出标记为 `forced update`。`git ls-remote origin refs/heads/main` 返回 `317c435ed7c178ae06b68590765b3a1964260623`，与本地 `HEAD` 完全一致；`git status -sb` 显示本地与 `origin/main` 同步。
+
+### 7.3 GitHub Actions
+
+历史重写触发 GitHub Actions run `31087474329`：
+
+- Checkout repository：通过；
+- Set up Python：通过；
+- Install dependencies：通过；
+- Validate repository package：通过；
+- Parse dbt project：通过；
+- Run Python tests：通过；
+- `quality` job 总耗时约 1 分 6 秒，最终结论 `success`。
+
+运行地址：<https://github.com/luyan9513/olist-growth-ops-intelligence/actions/runs/31087474329>
+
+### 7.4 最终边界
+
+远端可达 `main` 历史已不包含 5 份材料的文件路径和正文；当前公开版本也没有对应入口或强制校验依赖。本地私有副本仍完整保留。GitHub 对旧提交 URL、服务端缓存或第三方镜像的立即清除不作保证，但这些文件不包含密钥；若未来处理真正敏感数据，应按 GitHub 敏感数据移除流程另行处理。
